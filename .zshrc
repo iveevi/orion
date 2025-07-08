@@ -23,7 +23,7 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 # Zinit plugins
-zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
