@@ -1,6 +1,4 @@
 return {
-	{
-		"shaunsingh/nord.nvim",
-		lazy = true,
-	},
+	{ "shaunsingh/nord.nvim", },
+	{ "rmehri01/onenord.nvim", },
 }
