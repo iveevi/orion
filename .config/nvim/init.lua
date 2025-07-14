@@ -1,9 +1,20 @@
-require("config.lazy")
+require('config.lazy')
 
 vim.cmd [[ colorscheme onenord ]]
 
 vim.opt.laststatus = 3
 vim.opt.wrap = false
+
+-- LSP configuration
+vim.lsp.enable('clangd')
+vim.lsp.enable('pyright')
+
+-- Saving files
+vim.keymap.set(
+	{ 'i', 'v', 'n', 't' },
+	'<C-s>', '<cmd>w<cr>',
+	{ noremap = true, silent = true }
+)
 
 -- File tree
 vim.keymap.set(
@@ -22,6 +33,20 @@ vim.keymap.set(
 -- Grep searcher
 vim.keymap.set(
 	{ 'i', 'v', 'n', 't' },
-	'<C-l>', '<cmd>Telescope live_grep<cr>',
+	'<C-g>', '<cmd>Telescope live_grep<cr>',
+	{ noremap = true, silent = true }
+)
+
+-- Escaping out of terminals
+vim.keymap.set(
+	{ 't' },
+	'<esc>', '<C-\\><C-n>',
+	{ noremap = true, silent = true }
+)
+
+-- Toggling the central terminal
+vim.keymap.set(
+	{ 'i', 'v', 'n', 't' },
+	'<C-`>', '<cmd>ToggleTerm direction=float<cr>',
 	{ noremap = true, silent = true }
 )

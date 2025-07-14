@@ -1,6 +1,6 @@
 return {
 	{
-		"b0o/incline.nvim",
+		'b0o/incline.nvim',
 		config = function()
 			local helpers = require('incline.helpers')
 			local devicons = require('nvim-web-devicons')
@@ -30,14 +30,43 @@ return {
 	},
 
 	{
-		"nvim-tree/nvim-web-devicons",
+		'nvim-tree/nvim-web-devicons',
 	},
 
 	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		'folke/todo-comments.nvim',
+		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
-			require("todo-comments").setup {}
+			require('todo-comments').setup {}
 		end,
+	},
+
+	{
+		'echasnovski/mini.nvim',
+		version = '*',
+	},
+
+	{
+		'romgrk/barbar.nvim',
+		dependencies = {
+			'nvim-tree/nvim-web-devicons',
+		},
+		init = function() vim.g.barbar_auto_setup = false end,
+		opts = {},
+	},
+
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		config = function()
+			require('ibl').setup {}
+		end,
+	},
+
+	{
+		'MunifTanjim/nui.nvim',
+	},
+
+	{
+		'folke/zen-mode.nvim',
 	},
 }
