@@ -20,7 +20,15 @@ return {
 	},
 
 	{
+		'lewis6991/hover.nvim',
+		config = function()
+			require('hover').config {}
+		end,
+	},
+
+	{
 		'saghen/blink.cmp',
+		version = '1.*',
 		config = function()
 			require('blink.cmp').setup {
 				completion = {

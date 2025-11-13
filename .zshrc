@@ -35,5 +35,13 @@ SAVEHIST=10000
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Enable home and end keys
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
 # Aliases
 alias ls='ls --color'
+
+# Expand path
+export PATH=$PATH:~/.spicetify/
+export PATH=$PATH:~/.local/bin/

@@ -1,4 +1,22 @@
 return {
+	-- {
+	-- 	'nvimdev/dashboard-nvim',
+	-- 	event = 'VimEnter',
+	-- 	config = function()
+	-- 		require('dashboard').setup {
+	-- 			theme = 'hyper',
+	-- 			config = {
+	-- 				week_header = {
+	-- 					enable = true,
+	-- 				},
+	-- 			},
+	-- 		}
+	-- 	end,
+	-- 	dependencies = {
+	-- 		{ 'nvim-tree/nvim-web-devicons' }
+	-- 	}
+	-- },
+
 	{
 		'b0o/incline.nvim',
 		config = function()
@@ -22,7 +40,6 @@ return {
 						' ',
 						{ filename, gui = modified and 'bold,italic' or 'bold' },
 						' ',
-						guibg = '#4c566a',
 					}
 				end,
 			}
@@ -46,14 +63,14 @@ return {
 		version = '*',
 	},
 
-	{
-		'romgrk/barbar.nvim',
-		dependencies = {
-			'nvim-tree/nvim-web-devicons',
-		},
-		init = function() vim.g.barbar_auto_setup = false end,
-		opts = {},
-	},
+	-- {
+	-- 	'romgrk/barbar.nvim',
+	-- 	dependencies = {
+	-- 		'nvim-tree/nvim-web-devicons',
+	-- 	},
+	-- 	init = function() vim.g.barbar_auto_setup = false end,
+	-- 	opts = {},
+	-- },
 
 	{
 		'lukas-reineke/indent-blankline.nvim',
@@ -67,6 +84,11 @@ return {
 	},
 
 	{
-		'folke/zen-mode.nvim',
-	},
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-tree/nvim-web-devicons'
+		},
+		opts = {},
+	}
 }
