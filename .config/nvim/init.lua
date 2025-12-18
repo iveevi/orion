@@ -1,12 +1,13 @@
 require('config.lazy')
 
 -- For Neovide
-vim.g.neovide_floating_shadow = false
-vim.o.guifont = 'IosevkaTerm Nerd Font Mono:h22'
 vim.g.neovide_cursor_trail_size = 0
+vim.g.neovide_floating_shadow = false
+vim.o.guifont = 'IosevkaTerm Nerd Font Mono:h16'
+vim.o.termguicolors = false
 
-vim.cmd [[ set background=light]]
-vim.cmd [[ colorscheme everforest ]]
+vim.cmd [[ colorscheme nordfox ]]
+-- vim.cmd [[ colorscheme everforest ]]
 
 vim.opt.laststatus = 3
 vim.opt.wrap = false
@@ -36,6 +37,13 @@ vim.keymap.set(
 	{ noremap = true, silent = true }
 )
 
+-- Active buffer searches
+vim.keymap.set(
+	{ 'i', 'v', 'n', 't' },
+	'<C-l>', '<cmd>Telescope buffers<cr>',
+	{ noremap = true, silent = true }
+)
+
 -- Grep searcher
 vim.keymap.set(
 	{ 'i', 'v', 'n', 't' },
@@ -61,14 +69,14 @@ vim.keymap.set(
 	'n', 'hh',
 	function()
 		require('hover').open()
-	end,
-{ desc = 'hover.nvim (open)' })
+	end
+)
 
 -- Refactoring
-vim.keymap.set(
-	{ 'i', 'n' }, '<C-r>',
-	vim.lsp.buf.rename,
-{ desc = 'hover.nvim (open)' })
+vim.keymap.set({ 'i', 'n' }, '<C-r>', vim.lsp.buf.rename)
+
+-- Go to definition
+vim.keymap.set({ 'i', 'n' }, 'gd', vim.lsp.buf.definition)
 
 -- Session managing
 vim.keymap.set(
@@ -83,7 +91,7 @@ vim.keymap.set(
 	end,
 { noremap = true, silent = true })
 
--- TODO: lua-ify
+vim.cmd [[ highlight NormalFloat guibg=None ctermbg=None ]]
 vim.cmd [[ highlight FloatBorder guibg=None ctermbg=None ]]
 
 -- Copy pasting overrides

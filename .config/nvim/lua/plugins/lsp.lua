@@ -22,7 +22,11 @@ return {
 	{
 		'lewis6991/hover.nvim',
 		config = function()
-			require('hover').config {}
+			require('hover').config {
+				preview_opts = {
+					border = 'rounded',
+				},
+			}
 		end,
 	},
 
