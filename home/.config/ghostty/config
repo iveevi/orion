@@ -1,8 +1,7 @@
 theme = Nordfox
-# theme = everforest-dark
 
 font-family = IosevkaTerm Nerd Font Mono
-font-size = 16
+font-size = 22
 
 keybind = ctrl+0=new_split:right
 keybind = ctrl+9=new_split:down
@@ -17,3 +16,5 @@ window-padding-balance = true
 window-show-tab-bar = auto
 
 confirm-close-surface = false
+
+window-save-state = always

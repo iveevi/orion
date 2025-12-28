@@ -54,4 +54,8 @@ return {
 			}
 		end,
 	},
+
+	{
+		'xuhdev/vim-latex-live-preview',
+	},
 }
