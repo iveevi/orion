@@ -1,13 +1,6 @@
 require('config.lazy')
 
--- For Neovide
-vim.g.neovide_cursor_trail_size = 0
-vim.g.neovide_floating_shadow = false
-vim.o.guifont = 'IosevkaTerm Nerd Font Mono:h16'
-vim.o.termguicolors = false
-
 vim.cmd [[ colorscheme nordfox ]]
--- vim.cmd [[ colorscheme everforest ]]
 
 vim.opt.laststatus = 3
 vim.opt.wrap = false
@@ -98,3 +91,12 @@ vim.cmd [[ highlight FloatBorder guibg=None ctermbg=None ]]
 vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>"+p', { noremap = true })
 vim.api.nvim_set_keymap('n', '<sc-v>', '"+p', { noremap = true })
+
+-- For LateX files
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'tex', 'plaintex' },
+	callback = function()
+		vim.opt.wrap = true
+		vim.opt.breakindent = true
+	end,
+})

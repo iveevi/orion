@@ -1,4 +1,4 @@
-{
+
     "app_config": {
         "audio_config": {
             "audio": "pipewire"
@@ -184,15 +184,25 @@
         "python-pynvim",
         "reflector",
         "renderdoc",
+        "stow",
         "syncthing",
         "texlive",
         "tig",
         "tree",
         "tree-sitter",
         "tree-sitter-cli",
+        "ncdu",
+        "yazi",
         "ttf-iosevkaterm-nerd",
         "vim",
         "vulkan-devel",
+        "less",
+        "cargo",
+        "ninja",
+        "meson",
+        "colloid-icon-theme-git",
+        "sf-pro",
+        "go",
         "zsh"
     ],
     "parallel_downloads": 0,

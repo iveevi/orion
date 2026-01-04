@@ -45,3 +45,4 @@ alias ls='ls --color'
 # Expand path
 export PATH=$PATH:~/.spicetify/
 export PATH=$PATH:~/.local/bin/
+export SYSTEMD_EDITOR="nvim"

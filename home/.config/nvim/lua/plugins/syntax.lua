@@ -1,6 +1,7 @@
 return {
 	{
 		'nvim-treesitter/nvim-treesitter',
+		branch = 'master',
 		config = function() 
 			local configs = require('nvim-treesitter.configs')
 
