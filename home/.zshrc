@@ -41,6 +41,8 @@ bindkey "^[[F" end-of-line
 
 # Aliases
 alias ls='ls --color'
+alias todo='nvim ~/projects/TODO.md'
+alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
 
 # Expand path
 export PATH=$PATH:~/.spicetify/
