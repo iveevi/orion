@@ -5,9 +5,32 @@ vim.cmd [[ colorscheme nordfox ]]
 vim.opt.laststatus = 3
 vim.opt.wrap = false
 
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.expandtab = false
+
+vim.api.nvim_create_autocmd('FileType', {
+	group = vim.api.nvim_create_augroup('FileTypeSettings', { clear = true }),
+	callback = function(args)
+		local filetype = args.match
+		if filetype == 'lua' then
+			vim.bo.tabstop = 2
+			vim.bo.shiftwidth = 2
+			vim.bo.softtabstop = 2
+			vim.bo.expandtab = true
+		end
+	end,
+})
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+vim.opt.sessionoptions:remove('options')
+
 -- LSP configuration
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
+vim.lsp.enable('marksman')
 
 -- Saving files
 vim.keymap.set(
@@ -70,6 +93,21 @@ vim.keymap.set({ 'i', 'n' }, '<C-r>', vim.lsp.buf.rename)
 
 -- Go to definition
 vim.keymap.set({ 'i', 'n' }, 'gd', vim.lsp.buf.definition)
+
+-- Diff view management
+vim.g.diffview = false
+
+vim.keymap.set({ 'i', 'n', 't', 'v' }, 'll',
+	function()
+		if vim.g.diffview then
+			vim.cmd [[ DiffviewClose ]]
+		else
+			vim.cmd [[ DiffviewOpen ]]
+		end
+
+		vim.g.diffview = not vim.g.diffview
+	end,
+{ noremap = true, silent = true})
 
 -- Session managing
 vim.keymap.set(

@@ -24,14 +24,11 @@ return {
 		end,
 	},
 
-	{
-		'karb94/neoscroll.nvim',
-		opts = {},
-	},
+	{ 'kdheepak/lazygit.nvim', },
 
-	{
-		'sindrets/diffview.nvim',
-	},
+	{ 'sindrets/diffview.nvim', },
+
+	{ 'folke/which-key.nvim', },
 
 	{
 		'rmagatti/auto-session',
@@ -55,7 +52,5 @@ return {
 		end,
 	},
 
-	{
-		'xuhdev/vim-latex-live-preview',
-	},
+	{ 'xuhdev/vim-latex-live-preview', },
 }
