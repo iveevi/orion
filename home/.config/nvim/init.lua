@@ -13,13 +13,22 @@ vim.api.nvim_create_autocmd('FileType', {
 	group = vim.api.nvim_create_augroup('FileTypeSettings', { clear = true }),
 	callback = function(args)
 		local filetype = args.match
-		if filetype == 'lua' then
+     if filetype == 'axel' then
+			vim.bo.tabstop = 4
+			vim.bo.shiftwidth = 4
+			vim.bo.expandtab = false
+    elseif filetype == 'lua' then
 			vim.bo.tabstop = 2
 			vim.bo.shiftwidth = 2
-			vim.bo.softtabstop = 2
 			vim.bo.expandtab = true
 		end
 	end,
+})
+
+vim.filetype.add({
+  extension = {
+    axel = 'axel',
+  },
 })
 
 vim.opt.foldmethod = 'expr'
@@ -97,7 +106,7 @@ vim.keymap.set({ 'i', 'n' }, 'gd', vim.lsp.buf.definition)
 -- Diff view management
 vim.g.diffview = false
 
-vim.keymap.set({ 'i', 'n', 't', 'v' }, 'll',
+vim.keymap.set({ 'n', 't', 'v' }, '<C-d>',
 	function()
 		if vim.g.diffview then
 			vim.cmd [[ DiffviewClose ]]
