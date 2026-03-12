@@ -48,3 +48,4 @@ alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
 export PATH=$PATH:~/.spicetify/
 export PATH=$PATH:~/.local/bin/
 export SYSTEMD_EDITOR="nvim"
+export PATH="$HOME/.npm-global/bin:$PATH"

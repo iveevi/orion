@@ -31,10 +31,7 @@ vim.filetype.add({
   },
 })
 
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
-vim.opt.sessionoptions:remove('options')
+vim.opt.foldmethod = 'manual'
 
 -- LSP configuration
 vim.lsp.enable('clangd')
