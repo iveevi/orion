@@ -69,13 +69,19 @@ input {
     // focus-follows-mouse max-scroll-amount="0%"
 }
 
+gestures {
+	hot-corners {
+		off
+	}
+}
+
 recent-windows {
-    highlight {
-        active-color "#7fc8ffff"
-        urgent-color "#ff9999ff"
-        padding 10
-        corner-radius 10
-    }
+	highlight {
+		active-color "#7fc8ffff"
+		urgent-color "#ff9999ff"
+		padding 10
+		corner-radius 10
+	}
 }
 
 output "HDMI-A-2" {
@@ -342,6 +348,8 @@ binds {
     Mod+Ctrl+Right	{ move-column-right; }
     Mod+Ctrl+Down	{ move-column-to-workspace-down; }
     Mod+Ctrl+Up		{ move-column-to-workspace-up; }
+    Mod+L               { spawn-sh "~/.local/share/quickshell-lockscreen/lock.sh"; }
+    Mod+Shift+L         { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
 
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
