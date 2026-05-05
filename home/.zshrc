@@ -43,6 +43,12 @@ bindkey "^[[F" end-of-line
 alias ls='ls --color'
 alias todo='nvim ~/projects/TODO.md'
 alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
+alias reno='claude --system-prompt-file ~/.cc_patched.md --model "claude-opus-4-7[1m]"'
+alias rude='claude --system-prompt-file ~/.cc_fucker.md --model "claude-opus-4-7[1m]"'
+
+ccd() {
+	claude --system-prompt-file "/home/venki/.cc_$1.md" --model "claude-opus-4-7[1m]"
+}
 
 # Expand path
 export PATH=$PATH:~/.spicetify/
