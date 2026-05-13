@@ -13,11 +13,7 @@ vim.api.nvim_create_autocmd('FileType', {
 	group = vim.api.nvim_create_augroup('FileTypeSettings', { clear = true }),
 	callback = function(args)
 		local filetype = args.match
-     if filetype == 'axel' then
-			vim.bo.tabstop = 4
-			vim.bo.shiftwidth = 4
-			vim.bo.expandtab = false
-    elseif filetype == 'lua' then
+    if filetype == 'lua' then
 			vim.bo.tabstop = 2
 			vim.bo.shiftwidth = 2
 			vim.bo.expandtab = true
@@ -25,13 +21,11 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
-vim.filetype.add({
-  extension = {
-    axel = 'axel',
-  },
-})
-
 vim.opt.foldmethod = 'manual'
+
+-- Toggling comments
+vim.keymap.set('n', 'cc', 'gcc', { remap = true, desc = 'Toggle line comment' })
+vim.keymap.set('v', 'cc', 'gc', { remap = true, desc = 'Toggle selection comment' })
 
 -- LSP configuration
 vim.lsp.enable('clangd')

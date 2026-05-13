@@ -2,32 +2,17 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		branch = 'master',
-		config = function() 
+		build = ':TSUpdate',
+		lazy = false,
+		config = function()
 			require('nvim-treesitter.configs').setup {
 				ensure_installed = {
-					'cpp', 'lua', 'vim',
+					'cpp', 'lua', 'vim', 'vimdoc',
+					'glsl', 'markdown', 'markdown_inline',
 				},
-				highlight = {
-					enable = true
-				},
-				indent = {
-					enable = false
-				},
+				highlight = { enable = true },
+				indent = { enable = false },
 			}
-		end
-	},
-
-	{
-		'numToStr/Comment.nvim',
-		opts = {
-			toggler = {
-				line = 'cc',
-				block = 'cb',
-			},
-			opleader = {
-				line = 'cc',
-				block = 'cb',
-			},
-		},
+		end,
 	},
 }

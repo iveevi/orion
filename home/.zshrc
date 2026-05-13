@@ -50,6 +50,9 @@ ccd() {
 	claude --system-prompt-file "/home/venki/.cc_$1.md" --model "claude-opus-4-7[1m]"
 }
 
+alias chadley="$HOME/tools/chadley/chadley"
+alias mview="$HOME/tools/mview/mview"
+
 # Expand path
 export PATH=$PATH:~/.spicetify/
 export PATH=$PATH:~/.local/bin/
