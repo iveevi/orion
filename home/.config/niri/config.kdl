@@ -342,6 +342,7 @@ binds {
 
     Mod+Space		repeat=false { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+Return		repeat=false { spawn "ghostty"; }
+    Mod+T		repeat=false { spawn-sh "ghostty -e tb"; }
     Mod+E		repeat=false { spawn "nautilus"; }
     Ctrl+Q		repeat=false { close-window; }
     Mod+Ctrl+Left	{ move-column-left; }

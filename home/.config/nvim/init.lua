@@ -31,6 +31,7 @@ vim.keymap.set('v', 'cc', 'gc', { remap = true, desc = 'Toggle selection comment
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('marksman')
+vim.lsp.enable('rust-analyzer')
 
 -- Saving files
 vim.keymap.set(
