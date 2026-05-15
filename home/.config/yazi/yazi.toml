@@ -1,0 +1,30 @@
+[mgr]
+ratio = [0, 1, 2]
+
+[preview]
+max_width = 4096
+max_height = 4096
+wrap = "yes"
+
+[plugin]
+prepend_previewers = [
+	# Markdown via glow (nicer than rich-cli for prose)
+	{ url = "*.md",           run = 'piper -- CLICOLOR_FORCE=1 glow -w $w -s dark "$1"' },
+	{ url = "*.markdown",     run = 'piper -- CLICOLOR_FORCE=1 glow -w $w -s dark "$1"' },
+	{ mime = "text/markdown", run = 'piper -- CLICOLOR_FORCE=1 glow -w $w -s dark "$1"' },
+
+	# Structured data via rich-cli
+	{ url = "*.csv",   run = "rich-preview" },
+	{ url = "*.json",  run = "rich-preview" },
+	{ url = "*.ipynb", run = "rich-preview" },
+	{ url = "*.rst",   run = "rich-preview" },
+
+	# Media (replaces builtin image/video/audio)
+	{ mime = "{audio,video,image}/*", run = "mediatoggle" },
+	{ mime = "application/subrip",    run = "mediatoggle" },
+]
+
+prepend_preloaders = [
+	{ mime = "{audio,video,image}/*", run = "mediainfo" },
+	{ mime = "application/subrip",    run = "mediainfo" },
+]
