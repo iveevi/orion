@@ -5,5 +5,10 @@ desc = "Diff the selected with the hovered file"
 
 [[mgr.prepend_keymap]]
 on   = "M"
-run  = "plugin mediatoggle"
-desc = "Toggle mediainfo previewer on/off"
+run  = "plugin mediainfo -- toggle-preview"
+desc = "Toggle mediainfo preview image"
+
+[[mgr.prepend_keymap]]
+on   = "<C-m>"
+run  = "plugin mediainfo -- toggle-metadata"
+desc = "Toggle mediainfo metadata"

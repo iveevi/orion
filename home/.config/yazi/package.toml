@@ -9,11 +9,6 @@ rev = "1db18bb"
 hash = "c8d30a70659f1b880407e61c564ab4e8"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:full-border"
-rev = "1db18bb"
-hash = "eff8ff12fa4e5f035a10d8aeeb4c258d"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:diff"
 rev = "1db18bb"
 hash = "8b1af6b5a69797ee951f2a80ce570818"

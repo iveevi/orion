@@ -20,11 +20,24 @@ prepend_previewers = [
 	{ url = "*.rst",   run = "rich-preview" },
 
 	# Media (replaces builtin image/video/audio)
-	{ mime = "{audio,video,image}/*", run = "mediatoggle" },
-	{ mime = "application/subrip",    run = "mediatoggle" },
+	{ mime = "{audio,video,image}/*", run = "mediainfo" },
+	{ mime = "application/subrip",    run = "mediainfo" },
 ]
 
 prepend_preloaders = [
 	{ mime = "{audio,video,image}/*", run = "mediainfo" },
 	{ mime = "application/subrip",    run = "mediainfo" },
 ]
+
+# git plugin: status signs as linemode
+[[plugin.prepend_fetchers]]
+id    = "git"
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+id    = "git"
+url   = "*/"
+run   = "git"
+group = "git"
