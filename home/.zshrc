@@ -42,21 +42,17 @@ bindkey "^[[F" end-of-line
 # Aliases
 alias ls='ls --color'
 alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
-alias reno='claude --system-prompt-file ~/.cc_patched.md --model "claude-opus-4-7[1m]"'
-alias rude='claude --system-prompt-file ~/.cc_fucker.md --model "claude-opus-4-7[1m]"'
+alias reno='claude --system-prompt-file ~/.cc_patched.md'
+alias rude='claude --system-prompt-file ~/.cc_fucker.md'
 
 ccd() {
-	claude --system-prompt-file "/home/venki/.cc_$1.md" --model "claude-opus-4-7[1m]"
+	claude --system-prompt-file "/home/venki/.cc_$1.md"
 }
 
 alias chadley="$HOME/tools/chadley/chadley"
 alias mview="$HOME/tools/mview/mview"
 
-# Tailscale shortcut backed by the uv project at ~/tools/skynet.
-# Usage: `skynet ssh foo`, `skynet scp ./file foo:tools/orion/`, etc.
-skynet() {
-	uv run --project "$HOME/tools/skynet" --quiet skynet "$@"
-}
+tailnet="bleak-altered.ts.net"
 
 # Expand path
 export PATH=$PATH:~/.spicetify/

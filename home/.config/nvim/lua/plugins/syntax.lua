@@ -15,4 +15,8 @@ return {
 			}
 		end,
 	},
+
+  {
+    dir = '/home/venki/projects/porcelain/editors/nvim/',
+  },
 }
