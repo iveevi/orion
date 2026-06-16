@@ -18,10 +18,6 @@ prepend_previewers = [
 	{ url = "*.json",  run = "rich-preview" },
 	{ url = "*.ipynb", run = "rich-preview" },
 	{ url = "*.rst",   run = "rich-preview" },
-
-	# Media (replaces builtin image/video/audio)
-	{ mime = "{audio,video,image}/*", run = "mediainfo" },
-	{ mime = "application/subrip",    run = "mediainfo" },
 ]
 
 prepend_preloaders = [
