@@ -17,6 +17,6 @@ return {
 	},
 
   {
-    dir = '/home/venki/projects/porcelain/editors/nvim/',
+    dir = '/home/vedavamadath/projects/porcelain/porcelain/nvim/'
   },
 }

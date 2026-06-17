@@ -1,0 +1,10 @@
+#!/bin/sh
+# wake-mark — capture the follow-mode baseline.
+# Fires on SessionStart and Stop so the next /catch-up has a snapshot of the
+# working tree to diff against. Records the user's state at the moment CC
+# finished, so CC's own edits are excluded from the next turn's drift.
+. "$(dirname "$0")/wake-lib.sh"
+
+wake_resolve || exit 0
+wake_snapshot_tree > "$wake_base"
+exit 0

@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "deny": [
+      "Monitor"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/wake-mark"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/wake-mark"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/wake-diff"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "preferredNotifChannel": "notifications_disabled"
+}
