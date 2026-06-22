@@ -1,12 +1,12 @@
 ---
-name: paper
+name: papers-please
 description: Collect, catalog, and recall academic papers. Use when the user wants to add a paper (arXiv ID/URL, DOI, PDF URL, or local PDF) to their ~/papers collection, or asks a question about papers they've already collected ("what does X say about Y", "do I have anything on Z", "cite that paper"). Pulls valid PDFs into ~/papers, maintains INDEX.md + references.bib, and answers from per-paper digests rather than raw PDFs.
 ---
 
 The collection lives in `~/papers/`. The visible folder holds **only the PDFs** — everything else (truth + generated views + per-paper artifacts) lives under the hidden `~/papers/.store/`: `index.json` (truth), `INDEX.md` and `references.bib` (generated views), and `<id>.{txt,md,bib}` per paper. Never hand-edit the views. All mutations go through the script:
 
 ```
-uv run ~/.claude/skills/paper/add.py <subcommand>
+uv run ~/.claude/skills/papers-please/add.py <subcommand>
 ```
 
 Subcommands: `add <input>`, `search <query> [-n N] [--sort submittedDate|relevance|lastUpdatedDate]`, `set <id> [--title|--tags|--authors|--year|--doi]`, `digest <id>` (reads markdown from stdin), `render`, `backfill`.
