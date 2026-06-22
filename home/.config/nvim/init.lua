@@ -1,6 +1,6 @@
 require('config.lazy')
 
-vim.cmd [[ colorscheme nordfox ]]
+vim.cmd [[ colorscheme nord ]]
 
 vim.opt.laststatus = 3
 vim.opt.wrap = false
@@ -68,17 +68,16 @@ vim.keymap.set(
 	{ noremap = true, silent = true }
 )
 
--- Escaping out of terminals
-vim.keymap.set(
-	{ 't' },
-	'<esc>', '<C-\\><C-n>',
-	{ noremap = true, silent = true }
-)
-
 -- Toggling the central terminal
 vim.keymap.set(
 	{ 'i', 'v', 'n', 't' }, '<C-`>',
-	'<cmd>ToggleTerm direction=float<cr>',
+	'<cmd>1ToggleTerm direction=float<cr>',
+{ noremap = true, silent = true })
+
+-- Toggling the horizontal terminal
+vim.keymap.set(
+	{ 'i', 'v', 'n', 't' }, '<C-1>',
+	'<cmd>2ToggleTerm direction=vertical size=80<cr>',
 { noremap = true, silent = true })
 
 -- Hover window

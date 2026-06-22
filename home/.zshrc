@@ -52,7 +52,7 @@ ccd() {
 alias chadley="$HOME/tools/chadley/chadley"
 alias mview="$HOME/tools/mview/mview"
 
-tailnet="bleak-altered.ts.net"
+alias tailfleet="uv run $HOME/tools/tailfleet/tailfleet.py"
 
 # Expand path
 export PATH=$PATH:~/.spicetify/

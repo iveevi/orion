@@ -1,22 +1,27 @@
 return {
 	{
 		'nvim-treesitter/nvim-treesitter',
-		branch = 'master',
+		branch = 'main',
 		build = ':TSUpdate',
 		lazy = false,
 		config = function()
-			require('nvim-treesitter.configs').setup {
-				ensure_installed = {
-					'cpp', 'lua', 'vim', 'vimdoc',
-					'glsl', 'markdown', 'markdown_inline',
-				},
-				highlight = { enable = true },
-				indent = { enable = false },
+			local langs = {
+				'cpp', 'lua', 'vim', 'vimdoc',
+				'glsl', 'markdown', 'markdown_inline',
+        'slang',
 			}
+			require('nvim-treesitter').install(langs)
+			-- start highlighting per-buffer; main branch has no `highlight.enable`
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = { 'cpp', 'lua', 'vim', 'help', 'glsl', 'markdown', 'slang', 'python', },
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
+			})
 		end,
 	},
 
   {
-    dir = '/home/vedavamadath/projects/porcelain/porcelain/nvim/'
+    dir = vim.fn.expand('~/projects/porcelain/porcelain/nvim/'),
   },
 }

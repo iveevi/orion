@@ -1,7 +1,6 @@
-theme = Nordfox
-
-font-family = IosevkaTerm Nerd Font Mono
-font-size = 16
+theme = Nord
+font-family = CaskaydiaCove Nerd Font Mono
+font-size = 14
 
 keybind = ctrl+0=new_split:right
 keybind = ctrl+9=new_split:down
