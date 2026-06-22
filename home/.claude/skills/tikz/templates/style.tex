@@ -1,0 +1,41 @@
+% Default figure style: Linux Biolinum font, Nord palette, Triangle arrow heads.
+% Copy this preamble verbatim into every generated figure unless the user overrides it.
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{biolinum} % Linux Biolinum (Libertine sans) as default font
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,fit,backgrounds,decorations.pathmorphing}
+
+% --- Nord palette ---------------------------------------------------------
+% Polar Night (dark)
+\definecolor{nord0}{HTML}{2E3440}
+\definecolor{nord1}{HTML}{3B4252}
+\definecolor{nord2}{HTML}{434C5E}
+\definecolor{nord3}{HTML}{4C566A}
+% Snow Storm (light)
+\definecolor{nord4}{HTML}{D8DEE9}
+\definecolor{nord5}{HTML}{E5E9F0}
+\definecolor{nord6}{HTML}{ECEFF4}
+% Frost (blue/teal)
+\definecolor{nord7}{HTML}{8FBCBB}
+\definecolor{nord8}{HTML}{88C0D0}
+\definecolor{nord9}{HTML}{81A1C1}
+\definecolor{nord10}{HTML}{5E81AC}
+% Aurora (accents)
+\definecolor{nord11}{HTML}{BF616A} % red
+\definecolor{nord12}{HTML}{D08770} % orange
+\definecolor{nord13}{HTML}{EBCB8B} % yellow
+\definecolor{nord14}{HTML}{A3BE8C} % green
+\definecolor{nord15}{HTML}{B48EAD} % purple
+
+% --- Defaults -------------------------------------------------------------
+% Triangle arrow heads everywhere ->, <-, <->
+\tikzset{>={Triangle[length=2.4mm,width=2.0mm]}}
+
+% Convenience styles (use or ignore)
+\tikzset{
+  node distance=14mm,
+  nbox/.style   = {draw=nord10, fill=nord6, text=nord0, thick, rounded corners, inner sep=5pt},
+  ncircle/.style= {draw=nord10, fill=nord6, text=nord0, thick, circle, inner sep=3pt},
+  nedge/.style  = {nord3, thick, ->},
+}
