@@ -33,6 +33,14 @@
             "command": "$HOME/.claude/hooks/wake-diff"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"$HOME/.claude/STYLE.md\""
+          }
+        ]
       }
     ]
   },
@@ -40,6 +48,8 @@
     "pyright-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true
   },
+  "effortLevel": "xhigh",
+  "awaySummaryEnabled": false,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "preferredNotifChannel": "notifications_disabled"
