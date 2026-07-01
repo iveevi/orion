@@ -5,35 +5,7 @@
     ]
   },
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/wake-mark"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/wake-mark"
-          }
-        ]
-      }
-    ],
     "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/wake-diff"
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -50,11 +22,11 @@
     "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {},
-  "effortLevel": "medium",
+  "effortLevel": "high",
+  "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
-  "preferredNotifChannel": "notifications_disabled",
-  "promptSuggestionEnabled": false
+  "preferredNotifChannel": "notifications_disabled"
 }
