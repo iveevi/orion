@@ -25,7 +25,15 @@
 # Code conventions
 
 - Do NOT write comments.
+- Whenever writing or editing source code, load the `code-conventions` skill (`~/.claude/skills/code-conventions/`) and apply it. Read `general.md` plus the per-language file matching what you are editing.
 
 ## Python
 
 - Use a `uv` virtual environment to manage dependencies within a project.
+
+# Data analysis plotting
+
+- For any matplotlib/seaborn figure, use the `mpl-style` skill (`~/.claude/skills/mpl-style/`). Import `apply_style` from its `plot.py` and call it before plotting.
+- The style enforces: LaTeX always on, Linux Biolinum sans-serif font, seaborn Set2 palette.
+- Give every subplot its own descriptive title in small caps via `sc(...)`; omit the figure-level title.
+- Use proper Title Case for titles, axis labels, and legend entries.

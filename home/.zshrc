@@ -42,20 +42,10 @@ bindkey "^[[F" end-of-line
 # Aliases
 alias ls='ls --color'
 alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
-alias reno='claude --system-prompt-file ~/.cc_patched.md'
-alias rude='claude --system-prompt-file ~/.cc_fucker.md'
-
-ccd() {
-	claude --system-prompt-file "/home/venki/.cc_$1.md"
-}
-
-alias chadley="$HOME/tools/chadley/chadley"
-alias mview="$HOME/tools/mview/mview"
-
-alias tailfleet="uv run $HOME/tools/tailfleet/tailfleet.py"
+alias reno='claude --system-prompt-file ~/.claude/SYSTEM_PROMPT.md'
 
 # Expand path
-export PATH=$PATH:~/.spicetify/
 export PATH=$PATH:~/.local/bin/
-export SYSTEMD_EDITOR="nvim"
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+export SYSTEMD_EDITOR="nvim"

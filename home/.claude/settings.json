@@ -1,7 +1,10 @@
 {
   "permissions": {
     "deny": [
-      "Monitor"
+      "Monitor",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(rsync:*)"
     ]
   },
   "hooks": {
@@ -11,6 +14,11 @@
           {
             "type": "command",
             "command": "cat \"$HOME/.claude/STYLE.md\""
+          },
+          {
+            "type": "command",
+            "command": "tailscale status --json 2>/dev/null | jq -r '[(.Self | select(.OS==\"linux\") | .HostName + \" (self)\"), (.Peer[]? | select(.OS==\"linux\" and .Online) | .HostName)] | \"Available tailfleet nodes: \" + (join(\", \") // \"none\")' 2>/dev/null || true",
+            "timeout": 5
           }
         ]
       }
