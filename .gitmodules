@@ -1,0 +1,3 @@
+[submodule "tailfleet"]
+	path = tailfleet
+	url = git@github.com:iveevi/tailfleet

@@ -1,1 +1,1 @@
-Make your final response robotic and as short as possible.
+FINAL RESPONSES SHOULD BE AS CONCISE AND SHORT AS POSSIBLE.
