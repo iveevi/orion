@@ -3,7 +3,11 @@ require('config.lazy')
 vim.cmd [[ colorscheme nord ]]
 
 vim.opt.laststatus = 3
-vim.opt.wrap = false
+
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = '↳ '
 
 vim.opt.tabstop = 8
 vim.opt.shiftwidth = 8
@@ -23,6 +27,16 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.opt.foldmethod = 'manual'
 
+-- Auto-reload files changed outside of neovim
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+	callback = function()
+		if vim.fn.mode() ~= 'c' and vim.fn.getcmdwintype() == '' then
+			vim.cmd('checktime')
+		end
+	end,
+})
+
 -- Toggling comments
 vim.keymap.set('n', 'cc', 'gcc', { remap = true, desc = 'Toggle line comment' })
 vim.keymap.set('v', 'cc', 'gc', { remap = true, desc = 'Toggle selection comment' })
@@ -32,6 +46,7 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('marksman')
 vim.lsp.enable('rust-analyzer')
+vim.lsp.enable('tinymist')
 
 -- Saving files
 vim.keymap.set(
@@ -130,11 +145,20 @@ vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>"+p', { noremap = true })
 vim.api.nvim_set_keymap('n', '<sc-v>', '"+p', { noremap = true })
 
--- For LateX files
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'tex', 'plaintex' },
-	callback = function()
-		vim.opt.wrap = true
-		vim.opt.breakindent = true
-	end,
-})
+-- Arrow keys move by screen line when wrapped, but keep linewise semantics when
+-- given a count so that 5<Down> still jumps five real lines.
+vim.keymap.set({ 'n', 'x' }, '<Down>', function()
+	return vim.v.count == 0 and 'gj' or 'j'
+end, { expr = true, silent = true })
+
+vim.keymap.set({ 'n', 'x' }, '<Up>', function()
+	return vim.v.count == 0 and 'gk' or 'k'
+end, { expr = true, silent = true })
+
+vim.keymap.set({ 'n', 'x' }, '<Home>', 'g<Home>', { silent = true })
+vim.keymap.set({ 'n', 'x' }, '<End>', 'g<End>', { silent = true })
+
+vim.keymap.set('i', '<Down>', '<C-o>gj', { silent = true })
+vim.keymap.set('i', '<Up>', '<C-o>gk', { silent = true })
+vim.keymap.set('i', '<Home>', '<C-o>g<Home>', { silent = true })
+vim.keymap.set('i', '<End>', '<C-o>g<End>', { silent = true })
