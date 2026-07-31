@@ -1,3 +1,7 @@
+# Ongoing research projects. Must stay above the instant prompt preamble, since
+# p10k treats any output before the first prompt as initialization console I/O.
+~/.local/bin/ongoing && print
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -49,3 +53,7 @@ export PATH=$PATH:~/.local/bin/
 export PATH="$HOME/.npm-global/bin:$PATH"
 
 export SYSTEMD_EDITOR="nvim"
+
+# Ongoing research projects
+alias todo="${EDITOR:-nvim} ~/tools/orion/TODO.md"
+alias todos='glow ~/tools/orion/TODO.md'

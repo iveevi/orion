@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+
+import re
+import shutil
+from dataclasses import dataclass
+from pathlib import Path
+from typing import List, Tuple
+
+TODO_PATH = Path(__file__).resolve().parents[3] / "TODO.md"
+INDENT = "  "
+GAP = 4
+
+RESET = "\033[0m"
+BOLD = "\033[1m"
+DIM = "\033[2m"
+YELLOW = "\033[33m"
+GREEN = "\033[32m"
+
+ANSI = re.compile(r"\033\[[0-9;]*m")
+HEADING = re.compile(r"^#+\s+(.*\S)\s*$")
+ITEM = re.compile(r"^\s*[-*]\s+\[([ xX])\]\s+(.*\S)\s*$")
+WIP = re.compile(r"`wip`")
+
+
+@dataclass
+class Project:
+    name: str
+    done: int = 0
+    active: int = 0
+    total: int = 0
+
+
+def parse_projects(text: str) -> List[Project]:
+    projects: List[Project] = []
+    for line in text.splitlines():
+        heading = HEADING.match(line)
+        if heading:
+            projects.append(Project(heading.group(1)))
+            continue
+        item = ITEM.match(line)
+        if not item or not projects:
+            continue
+        current = projects[-1]
+        current.total += 1
+        if item.group(1) in "xX":
+            current.done += 1
+        elif WIP.search(item.group(2)):
+            current.active += 1
+    return [p for p in projects if p.total > 0]
+
+
+def bubbles(project: Project) -> str:
+    idle = project.total - project.done - project.active
+    return (
+        f"{GREEN}{'●' * project.done}{RESET}"
+        f"{YELLOW}{'◐' * project.active}{RESET}"
+        f"{DIM}{'○' * idle}{RESET}"
+    )
+
+
+def visible_width(text: str) -> int:
+    return len(ANSI.sub("", text))
+
+
+def pad(text: str, width: int) -> str:
+    return text + " " * (width - visible_width(text))
+
+
+def render(cells: List[Tuple[str, str]], terminal_width: int) -> str:
+    cell_width = max(
+        max(visible_width(head), visible_width(row)) for head, row in cells
+    )
+    span = cell_width + GAP
+    columns = max(1, (terminal_width - len(INDENT) + GAP) // span)
+    lines = [""]
+    for start in range(0, len(cells), columns):
+        chunk = cells[start : start + columns]
+        for index in range(2):
+            lines.append(
+                INDENT + "".join(pad(cell[index], span) for cell in chunk).rstrip()
+            )
+        lines.append("")
+    return "\n".join(lines[:-1])
+
+
+def main() -> None:
+    if not TODO_PATH.exists():
+        return
+    projects = parse_projects(TODO_PATH.read_text())
+    if not projects:
+        return
+    cells = [(f"{BOLD}{p.name}{RESET}", bubbles(p)) for p in projects]
+    print(render(cells, shutil.get_terminal_size(fallback=(80, 24)).columns))
+
+
+if __name__ == "__main__":
+    main()
