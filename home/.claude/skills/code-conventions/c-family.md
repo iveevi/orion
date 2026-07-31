@@ -59,6 +59,31 @@ static const float kernel[3] = {
 };
 ```
 
+- Initialize structs with designated initializers, naming every field: `{ .x = 1.0f, .y = 2.0f }`. Never positional. C++ forbids mixing the two forms and requires declaration order.
+
+```cpp
+auto point = Point { .x = 1.0f, .y = 2.0f };
+
+static const Entry table[] = {
+	{ .kind = Kind::Colon, .text = ":" },
+	{ .kind = Kind::Comma, .text = "," }
+};
+```
+
+- Name the type in a returned initializer rather than relying on the deduced braced form: `return Power { .left = 1, .right = 2 };`, not `return { 1, 2 };`.
+
+- When a designated initializer does not comfortably fit on one line, put each field on its own line with the closing brace on its own line. Braces around a single-statement branch are required once its body spans multiple lines.
+
+```cpp
+	if (text == entry.text) {
+		return Token {
+			.kind = entry.kind,
+			.offset = start,
+			.length = length
+		};
+	}
+```
+
 - For struct/class/enum definitions and inline (in-class) method definitions, the opening brace stays on the same line.
 
 ```cpp

@@ -17,5 +17,6 @@ Mandatory style rules for all code the user owns. Apply on every write or edit.
 | All languages            | `general.md`  |
 | Python                   | `python.md`   |
 | C, C++, CUDA             | `c-family.md` |
+| Porcelain (.por)         | `porcelain.md` |
 
 If no per-language file exists, apply `general.md` alone.

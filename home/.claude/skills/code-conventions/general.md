@@ -2,6 +2,7 @@
 
 Apply to all languages.
 
+- Add only code the current change exercises. No unused imports, variables, constants, fields, parameters, helpers, or branches; no speculative abstraction, no handling for cases that cannot yet occur. If nothing calls it now, do not write it.
 - Never prefix names with an underscore.
 - Use `snake_case` for variables, functions, fields, and other ordinary identifiers.
 - Use `PascalCase` for types (classes, structs, enums, type aliases, interfaces).
