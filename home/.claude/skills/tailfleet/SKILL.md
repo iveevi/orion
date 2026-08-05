@@ -1,6 +1,6 @@
 ---
 name: tailfleet
-description: Inspect hardware and run programs across the user's Tailscale network (linux nodes, e.g. verso/icaria/renoir/sauron). Use when the user wants to see CPU/GPU/memory/load across their tailnet machines, dispatch/monitor a job routine on remote nodes, sync files to/from nodes, stream job logs, or check what is currently running on the fleet.
+description: Inspect hardware and run programs across the user's Tailscale network (linux nodes). Use when the user wants to see CPU/GPU/memory/load across their tailnet machines, dispatch/monitor a job routine on remote nodes, sync files to/from nodes, stream job logs, or check what is currently running on the fleet.
 ---
 
 # tailfleet
@@ -47,7 +47,7 @@ pull: [out/**, logs/*.log]                     # nodes → host
 
 routines:
   train:
-    nodes: [verso, icaria]    # or ["*"] = every online linux node
+    nodes: [node-a, node-b]   # or ["*"] = every online linux node
     run: |
       uv sync --frozen
       uv run python train.py --shard $TF_NODE_INDEX/$TF_NODE_COUNT

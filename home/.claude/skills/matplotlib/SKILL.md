@@ -1,5 +1,5 @@
 ---
-name: mpl-style
+name: matplotlib
 description: Apply the user's standard matplotlib style to any data analysis plotting. Use whenever creating charts, plots, or figures with matplotlib/seaborn in Python. Enforces LaTeX rendering, Linux Biolinum sans-serif font, seaborn Set2 palette, and titling conventions.
 ---
 

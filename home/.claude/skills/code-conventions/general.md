@@ -10,6 +10,8 @@ Apply to all languages.
 
 ## Comments
 
-- Use single-line comment syntax only (`//`, `#`), never block/multi-line syntax (`/* */`, `"""`). For multi-line comments, use multiple single-line comments.
-- Put each comment on its own line. Never trail a comment off the end of a line of code.
-- Only comment non-trivial logic or for sectioning/organizational purposes.
+- Never write comments. Code must be self-explanatory through naming and structure.
+- This is absolute: no explanatory comments, no section headers, no docstrings, no TODO/FIXME markers, no commented-out code.
+- Do not add comments even when the surrounding file already has them.
+- Preserve comments that already exist in code you are editing; never introduce new ones.
+- Sole exceptions, only when functionally required: shebang lines, encoding declarations, license headers mandated by the project, and pragmas the toolchain reads (`# type: ignore`, `// eslint-disable`, `# noqa`).

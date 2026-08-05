@@ -7,6 +7,7 @@
       "Bash(rsync:*)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -35,15 +36,8 @@
     "ponytail@ponytail": true,
     "rust-analyzer-lsp@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    }
-  },
-  "effortLevel": "high",
+  "extraKnownMarketplaces": {},
+  "effortLevel": "low",
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",

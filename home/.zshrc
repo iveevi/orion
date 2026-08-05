@@ -46,7 +46,6 @@ bindkey "^[[F" end-of-line
 # Aliases
 alias ls='ls --color'
 alias wqrenderdoc='WAYLAND_DISPLAY= XDG_SESSION_TYPE=x11 qrenderdoc'
-alias reno='claude --system-prompt-file ~/.claude/SYSTEM_PROMPT.md'
 
 # Expand path
 export PATH=$PATH:~/.local/bin/

@@ -6,7 +6,7 @@ TYP="${1:?usage: compile.sh <file.typ>}"
 
 DIR="$(cd "$(dirname "$TYP")" && pwd)"
 BASE="$(basename "$TYP" .typ)"
-DPI="${CETZ_DPI:-300}"
+DPI="${DIAGRAM_DPI:-300}"
 PPI=$(python3 -c "print(int($DPI))" 2>/dev/null || echo "$DPI")
 PNG="$DIR/$BASE.png"
 LOG="$DIR/$BASE.build.log"
