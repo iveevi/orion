@@ -40,6 +40,10 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHo
 	end,
 })
 
+-- Macros disabled
+vim.keymap.set({ 'n', 'x' }, 'q', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, '@', '<Nop>', { noremap = true, silent = true })
+
 -- Toggling comments
 vim.keymap.set('n', 'cc', 'gcc', { remap = true, desc = 'Toggle line comment' })
 vim.keymap.set('v', 'cc', 'gc', { remap = true, desc = 'Toggle selection comment' })
@@ -50,6 +54,18 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('marksman')
 vim.lsp.enable('rust-analyzer')
 vim.lsp.enable('tinymist')
+vim.lsp.enable('slangd')
+
+vim.lsp.config('slangd', {
+	settings = {
+		slang = {
+			inlayHints = {
+				deducedTypes = true,
+				parameterNames = true,
+			},
+		},
+	},
+})
 
 -- Saving files
 vim.keymap.set(
@@ -97,14 +113,6 @@ vim.keymap.set(
 	{ 'i', 'v', 'n', 't' }, '<C-1>',
 	'<cmd>2ToggleTerm direction=vertical size=80<cr>',
 { noremap = true, silent = true })
-
--- Hover window
-vim.keymap.set(
-	'n', 'hh',
-	function()
-		require('hover').open()
-	end
-)
 
 -- Refactoring
 vim.keymap.set({ 'i', 'n' }, '<C-r>', vim.lsp.buf.rename)

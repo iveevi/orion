@@ -20,17 +20,6 @@ return {
 	},
 
 	{
-		'lewis6991/hover.nvim',
-		config = function()
-			require('hover').config {
-				preview_opts = {
-					border = 'rounded',
-				},
-			}
-		end,
-	},
-
-	{
 		'saghen/blink.cmp',
 		version = '1.*',
 		config = function()
