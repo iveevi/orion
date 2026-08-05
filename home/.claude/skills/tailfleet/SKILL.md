@@ -15,7 +15,7 @@ The `tailfleet` shell alias only exists in the user's interactive zsh. From the
 bash tool, always invoke:
 
 ```
-uv run --project ~/tools/tailfleet tailfleet <subcommand> [args]
+uv run --project ~/tools/orion/tailfleet tailfleet <subcommand> [args]
 ```
 
 Use `--project` (not `--directory`): job subcommands find `tailfleet.yaml` by
@@ -30,6 +30,7 @@ project.
 | `monitor` | the same table, live-refreshing at the top of the screen. `-`/`+` adjust the refresh rate (shown as `⟳ Ns`), `q` quits. Interactive only — do not run from the bash tool; tell the user to run `tailfleet monitor` themselves. |
 | `run <routine>` | push files, then dispatch the routine on its nodes (detached via `setsid`) |
 | `ps` | routine × node table: running / exit code / duration |
+| `jobs [-a]` | fleet-wide job table across **every** node and workspace, ignoring cwd/config. Running-only unless `-a`. Safe to run from the bash tool. |
 | `logs <routine>[@<node>] [-f] [-n N]` | tail a routine's log; `@node` required if the routine has multiple nodes |
 | `kill <routine>` | TERM the routine's process group on its nodes |
 | `sync` | push the `push:` globs to all routine nodes, no dispatch |
@@ -74,6 +75,6 @@ routines:
 
 ## Source
 
-`~/tools/tailfleet/` — uv package: `cli.py` (argparse subcommands), `monitor.py`
+`~/tools/orion/tailfleet/` — uv package: `cli.py` (argparse subcommands), `monitor.py`
 (Textual app), `render.py`, `nodes.py` (discovery/SSH), `probes.py`, `parse.py`,
 `config.py` (yaml load/validate), `jobs.py` (sync/dispatch/ps/logs/kill).

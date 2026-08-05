@@ -1,6 +1,6 @@
 # Ongoing research projects. Must stay above the instant prompt preamble, since
 # p10k treats any output before the first prompt as initialization console I/O.
-~/.local/bin/ongoing && print
+~/.local/bin/tod && print
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

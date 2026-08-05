@@ -2,9 +2,8 @@
 
 general rendering engine
 
-- [ ] clean up code as much as possible
-- [ ] create an extension or plugin system
-- [ ] experiment with naive triangulation SBR
+- [ ] implement and test RIS
+- [ ] test out basic version of triangulation SBR
 
 # xdr
 
@@ -60,3 +59,11 @@ optimizing diagrams for readability
 
 - [ ] rendering engine for basic primitives like arrows and text
 - [ ] optimization of labels in flowchart-like diagram
+
+# glow
+
+glow discharge paper implementation
+
+- [ ] clean up source code
+- [x] improve ui interface by leaving the docked style
+- [x] switch to typst pdf for the byeond the paper doc

@@ -3,6 +3,7 @@
 Apply to all languages.
 
 - Add only code the current change exercises. No unused imports, variables, constants, fields, parameters, helpers, or branches; no speculative abstraction, no handling for cases that cannot yet occur. If nothing calls it now, do not write it.
+- Always use an explicit `return` keyword where the language allows a value to be returned implicitly (Rust's trailing expression, and the like). This is about never relying on an implicit return *value*; it does not mean putting a bare `return` at the end of a void/`-> None` function.
 - Never prefix names with an underscore.
 - Use `snake_case` for variables, functions, fields, and other ordinary identifiers.
 - Use `PascalCase` for types (classes, structs, enums, type aliases, interfaces).

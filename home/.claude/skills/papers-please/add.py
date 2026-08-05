@@ -370,6 +370,21 @@ def cmd_set(args):
         rec["year"] = args.year
     if args.doi:
         rec["doi"] = args.doi
+    if args.title or args.authors is not None or args.year:
+        rec["citekey"] = citekey(rec["authors"], rec["year"], rec["title"], rec["id"], idx)
+        # metadata was set by hand, so it is verified; re-check the duplicate flag,
+        # which may be stale (it fires on title equality, e.g. two "Untitled paper"s)
+        flags = [f for f in rec.get("flags", [])
+                 if f != "unverified-metadata" and not f.startswith("duplicate-of:")]
+        dup = [pid2 for pid2, p in idx["papers"].items()
+               if pid2 != rec["id"] and (
+                   (rec.get("doi") and p.get("doi") == rec["doi"])
+                   or p.get("title", "").lower() == rec["title"].lower())]
+        if dup:
+            flags.append(f"duplicate-of:{dup[0]}")
+        rec["flags"] = flags
+    if args.citekey:
+        rec["citekey"] = args.citekey
     write_artifacts(rec)
     save_index(idx)
     render()
@@ -459,7 +474,9 @@ def main():
     a = sub.add_parser("add"); a.add_argument("input"); a.set_defaults(fn=cmd_add)
     s = sub.add_parser("set"); s.add_argument("id")
     s.add_argument("--title"); s.add_argument("--tags"); s.add_argument("--authors")
-    s.add_argument("--year", type=int); s.add_argument("--doi"); s.set_defaults(fn=cmd_set)
+    s.add_argument("--year", type=int); s.add_argument("--doi")
+    s.add_argument("--citekey", help="pin the citekey (e.g. one already cited elsewhere)")
+    s.set_defaults(fn=cmd_set)
     d = sub.add_parser("digest"); d.add_argument("id"); d.set_defaults(fn=cmd_digest)
     sr = sub.add_parser("search"); sr.add_argument("query")
     sr.add_argument("-n", type=int, default=5)

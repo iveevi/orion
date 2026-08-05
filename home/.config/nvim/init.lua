@@ -21,6 +21,9 @@ vim.api.nvim_create_autocmd('FileType', {
 			vim.bo.tabstop = 2
 			vim.bo.shiftwidth = 2
 			vim.bo.expandtab = true
+    elseif filetype == 'cup' then
+			vim.bo.tabstop = 4
+			vim.bo.shiftwidth = 4
 		end
 	end,
 })

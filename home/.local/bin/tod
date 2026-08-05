@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
+import json
 import re
 import shutil
-from dataclasses import dataclass
+import sys
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 TODO_PATH = Path(__file__).resolve().parents[3] / "TODO.md"
+EDITS = ("add", "desc", "rm", "done", "active", "idle")
 INDENT = "  "
 GAP = 4
 
@@ -25,28 +28,94 @@ WIP = re.compile(r"`wip`")
 @dataclass
 class Project:
     name: str
+    line: int = 0
+    desc: str = ""
     done: int = 0
     active: int = 0
     total: int = 0
+    items: List[Dict[str, object]] = field(default_factory=list)
 
 
 def parse_projects(text: str) -> List[Project]:
     projects: List[Project] = []
-    for line in text.splitlines():
+    for number, line in enumerate(text.splitlines()):
         heading = HEADING.match(line)
         if heading:
-            projects.append(Project(heading.group(1)))
+            projects.append(Project(heading.group(1), number))
             continue
-        item = ITEM.match(line)
-        if not item or not projects:
+        if not projects:
             continue
         current = projects[-1]
+        item = ITEM.match(line)
+        if not item:
+            if line.strip() and not current.total and not current.desc:
+                current.desc = line.strip()
+            continue
         current.total += 1
         if item.group(1) in "xX":
             current.done += 1
+            status = "done"
         elif WIP.search(item.group(2)):
             current.active += 1
-    return [p for p in projects if p.total > 0]
+            status = "active"
+        else:
+            status = "idle"
+        current.items.append(
+            {
+                "text": WIP.sub("", item.group(2)).strip(),
+                "status": status,
+                "line": number,
+            }
+        )
+    return projects
+
+
+def write_item(line: str, text: str, status: str) -> str:
+    prefix = line[: line.index("[")]
+    mark = "x" if status == "done" else " "
+    suffix = " `wip`" if status == "active" else ""
+    return f"{prefix}[{mark}] {text}{suffix}"
+
+
+def edit(command: str, target: int, text: str) -> None:
+    lines = TODO_PATH.read_text().splitlines()
+    if not 0 <= target < len(lines):
+        raise SystemExit(f"line {target} out of range")
+    if command in ("add", "desc"):
+        if not HEADING.match(lines[target]):
+            raise SystemExit(f"line {target} is not a project heading")
+        end = target + 1
+        insert = end
+        desc = -1
+        while end < len(lines) and not HEADING.match(lines[end]):
+            if lines[end].strip():
+                insert = end + 1
+                if desc < 0 and not ITEM.match(lines[end]):
+                    desc = end
+            end += 1
+        if command == "desc":
+            if desc < 0:
+                lines[target + 1 : target + 1] = ["", text]
+            elif text:
+                lines[desc] = text
+            else:
+                del lines[desc]
+        else:
+            # keep a blank line between the description and the first item
+            if not ITEM.match(lines[insert - 1]):
+                lines.insert(insert, "")
+                insert += 1
+            lines.insert(insert, f"- [ ] {text}")
+    else:
+        item = ITEM.match(lines[target])
+        if not item:
+            raise SystemExit(f"line {target} is not a todo item")
+        if command == "rm":
+            del lines[target]
+        else:
+            body = WIP.sub("", item.group(2)).strip()
+            lines[target] = write_item(lines[target], body, command)
+    TODO_PATH.write_text("\n".join(lines) + "\n")
 
 
 def bubbles(project: Project) -> str:
@@ -86,7 +155,21 @@ def render(cells: List[Tuple[str, str]], terminal_width: int) -> str:
 def main() -> None:
     if not TODO_PATH.exists():
         return
+    args = sys.argv[1:]
+    if args and args[0] == "path":
+        print(TODO_PATH)
+        return
+    if args and args[0] == "group":
+        name = " ".join(args[1:])
+        TODO_PATH.write_text(TODO_PATH.read_text().rstrip("\n") + f"\n\n# {name}\n")
+        return
+    if args and args[0] in EDITS:
+        edit(args[0], int(args[1]), " ".join(args[2:]))
+        return
     projects = parse_projects(TODO_PATH.read_text())
+    if "--json" in sys.argv:
+        print(json.dumps([asdict(p) for p in projects]))
+        return
     if not projects:
         return
     cells = [(f"{BOLD}{p.name}{RESET}", bubbles(p)) for p in projects]
