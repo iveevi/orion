@@ -17,14 +17,8 @@ return {
 			})
 		end,
 	},
-
-  {
-    dir = vim.fn.expand('~/projects/porcelain/porcelain/nvim/'),
-    ft = "por",
-  },
   
-  -- {
-  --   dir = vim.fn.expand('~/projects/cupric/source/nvim/'),
-  --   ft = "cup",
-  -- },
+  {
+    dir = vim.fn.expand('~/projects/porcelain/editors/nvim/'),
+  },
 }
