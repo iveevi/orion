@@ -8,7 +8,6 @@ from pathlib import Path
 from rich.console import Console
 from rich.text import Text
 
-LEASES = Path.home() / ".tailfleet" / "leases"
 MODES = {
     "plan": ("blue", "⏸ plan"),
     "acceptEdits": ("green", "⏵⏵ accept edits"),
@@ -63,16 +62,7 @@ def branch_bubble(dirpath):
     return ("yellow" if any(counts.values()) else "green"), label
 
 
-def lease_of(sid):
-    if not sid or not LEASES.is_dir():
-        return None, None
-    for f in sorted(LEASES.glob("*")):
-        if not f.is_file():
-            continue
-        parts = (f.read_text().strip().split("\n") + [""])[:2]
-        if parts[0] == sid:
-            return f.name, parts[1]
-    return None, None
+RIGHT_MARGIN = 6
 
 
 def term_cols():
@@ -107,14 +97,11 @@ def main():
     mode = MODES.get(d.get("permission_mode") or "")
     if mode:
         right.append(mode)
-    node, name = lease_of(d.get("session_id"))
-    if node:
-        right.append(("magenta", f"◆ {node}" + (f" · {name}" if name else "")))
     right.append((heat(used), f"{used}%"))
 
-    cols = term_cols()
+    cols = term_cols() - RIGHT_MARGIN
     lt, rt = bubbles(left), bubbles(right)
-    line = Text.assemble(lt, " " * max(1, cols - lt.cell_len - rt.cell_len - 3), rt)
+    line = Text.assemble(lt, " " * max(1, cols - lt.cell_len - rt.cell_len), rt)
     Console(width=cols, force_terminal=True, soft_wrap=True).print(line, end="")
 
 
