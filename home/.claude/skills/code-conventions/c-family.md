@@ -129,6 +129,8 @@ static const float kernel[3] = {
 
 - Initialize structs with designated initializers, naming every field: `{ .x = 1.0f, .y = 2.0f }`. Never positional. C++ forbids mixing the two forms and requires declaration order.
 
+  Compilers enforce this: build with `-Wmissing-designated-field-initializers` (clang) so a partly-named initializer is a warning rather than a silent reliance on default member initializers.
+
 ```cpp
 auto point = Point { .x = 1.0f, .y = 2.0f };
 
@@ -199,6 +201,23 @@ if (x > 0) {
 	zero();
 }
 ```
+
+## Warning flags
+
+Build with these on, and keep the tree at zero warnings. They are the mechanical half of the rules above — a convention a compiler can check should be checked by the compiler.
+
+```
+-Wall -Wextra -Wshadow -Wmissing-designated-field-initializers -Wunreachable-code
+```
+
+- `-Wmissing-designated-field-initializers` (clang) enforces the designated-initializer rule above.
+- `-Wshadow` catches a local that hides a member or an enclosing local. The member case matters most: inside that scope the name silently means the local.
+- `-Wunreachable-code` finds statements after a `[[noreturn]]` call, which otherwise accumulate as dead `continue`/`break` lines.
+- `-Wno-unused-parameter` is a reasonable exemption where an interface fixes a signature.
+
+GCC accepts all of these except `-Wmissing-designated-field-initializers`; it is worth running a clang build periodically for that one alone.
+
+The designated-initializer rule is about **data aggregates**. A stateful object — a parser, a checker, a code generator — constructed once from its dependencies, with a dozen or more internal members that all carry defaults, is exempt: naming every one of them at the construction site is noise, not clarity. Likewise a static table of a wide record type, where spelling every field per row buries the two that vary. Those are the only cases where leaving the warning standing is right.
 
 ## WGSL
 
