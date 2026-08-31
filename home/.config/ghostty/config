@@ -1,4 +1,8 @@
-theme = Nord
+# theme = Nord
+theme = venus
+
+# font-family = IosevkaTerm Nerd Font Mono
+# font-size = 16
 font-family = CaskaydiaCove Nerd Font Mono
 font-size = 14
 
@@ -17,3 +21,7 @@ window-show-tab-bar = auto
 confirm-close-surface = false
 
 window-save-state = always
+keybind = ctrl+shift+e=equalize_splits
+
+gtk-single-instance = false
+linux-cgroup = always
