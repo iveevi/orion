@@ -62,7 +62,7 @@ def branch_bubble(dirpath):
     return ("yellow" if any(counts.values()) else "green"), label
 
 
-RIGHT_MARGIN = 6
+RIGHT_MARGIN = 5
 
 
 def term_cols():
