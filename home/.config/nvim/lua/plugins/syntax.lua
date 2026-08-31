@@ -20,5 +20,16 @@ return {
   
   {
     dir = vim.fn.expand('~/projects/porcelain/editors/nvim/'),
+    name = 'porcelain-nvim',
+  },
+  
+  {
+    dir = vim.fn.expand('~/projects/cupric/editors/nvim/'),
+    name = 'cupric-nvim',
+  },
+  
+  {
+    dir = vim.fn.expand('~/projects/icandi/editors/nvim/'),
+    name = 'icandi-nvim',
   },
 }

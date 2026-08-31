@@ -1,8 +1,10 @@
 require('config.lazy')
 
-vim.cmd [[ colorscheme nord ]]
+vim.cmd [[ colorscheme venus ]]
 
 vim.opt.laststatus = 3
+vim.opt.showmode = false
+vim.opt.cmdheight = 0
 
 vim.opt.wrap = true
 vim.opt.linebreak = true

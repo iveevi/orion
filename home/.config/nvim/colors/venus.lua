@@ -1,0 +1,267 @@
+local function styled(color, flags)
+	local spec = { fg = color }
+	if flags then
+		spec.bold = flags:find("b") ~= nil
+		spec.italic = flags:find("i") ~= nil
+		spec.underline = flags:find("u") ~= nil
+	end
+	return spec
+end
+
+local function build(c)
+	vim.cmd.highlight("clear")
+	if vim.fn.exists("syntax_on") == 1 then
+		vim.cmd.syntax("reset")
+	end
+	vim.o.background = "dark"
+	vim.o.termguicolors = true
+	vim.g.colors_name = "venus"
+
+	local groups = {
+		Normal = { fg = c.ink, bg = c.bg },
+		NormalFloat = { fg = c.ink, bg = c.mantle },
+		FloatBorder = { fg = c.seam, bg = c.mantle },
+		CursorLine = { bg = c.mantle },
+		CursorLineNr = { fg = c.ink },
+		LineNr = { fg = c.overlay },
+		SignColumn = { bg = c.bg },
+		WinSeparator = { fg = c.seam },
+		Visual = { bg = c.plate },
+		Search = { fg = c.bg, bg = c.string },
+		IncSearch = { fg = c.bg, bg = c.string },
+		CurSearch = { fg = c.bg, bg = c.string },
+		MatchParen = { fg = c.string, bold = true },
+		Pmenu = { fg = c.ink, bg = c.plate },
+		PmenuSel = { fg = c.ink, bg = c.seam },
+		StatusLine = { fg = c.ink, bg = c.plate },
+		StatusLineNC = { fg = c.faint, bg = c.mantle },
+		TabLine = { fg = c.faint, bg = c.mantle },
+		TabLineSel = { fg = c.ink, bg = c.plate },
+		TabLineFill = { bg = c.bg },
+		Title = { fg = c.string, bold = true },
+		Directory = { fg = c.func },
+		NonText = { fg = c.seam },
+		Whitespace = { fg = c.seam },
+		Folded = { fg = c.faint, bg = c.mantle },
+		ErrorMsg = { fg = c.flow },
+		WarningMsg = { fg = c.amber },
+		MoreMsg = { fg = c.string },
+		Question = { fg = c.string },
+		DiffAdd = { fg = c.string, bg = c.mantle },
+		DiffChange = { fg = c.amber, bg = c.mantle },
+		DiffDelete = { fg = c.flow, bg = c.mantle },
+		DiffText = { fg = c.string, bg = c.plate },
+
+		Comment = styled(c.comment, c.st_comment or "i"),
+		Constant = styled(c.string, c.st_constant),
+		String = styled(c.string, c.st_string),
+		Character = styled(c.string, c.st_string),
+		Number = { fg = c.string },
+		Boolean = styled(c.string, c.st_constant),
+		Float = { fg = c.string },
+		Identifier = { fg = c.ink },
+		Function = styled(c.func, c.st_func),
+		Statement = styled(c.flow or c.keyword, c.st_flow or c.st_keyword),
+		Conditional = styled(c.flow or c.keyword, c.st_flow or c.st_keyword),
+		Repeat = styled(c.flow or c.keyword, c.st_flow or c.st_keyword),
+		Label = styled(c.keyword, c.st_keyword),
+		Operator = { fg = c.punct },
+		Keyword = styled(c.keyword, c.st_keyword),
+		Exception = { fg = c.flow },
+		PreProc = styled(c.func, c.st_preproc),
+		Include = styled(c.func, c.st_preproc),
+		Define = styled(c.func, c.st_preproc),
+		Macro = styled(c.func, c.st_preproc),
+		Type = styled(c.type, c.st_type),
+		StorageClass = styled(c.type, c.st_type),
+		Structure = styled(c.type, c.st_type),
+		Typedef = styled(c.type, c.st_type),
+		Special = { fg = c.func },
+		SpecialChar = { fg = c.func },
+		Delimiter = { fg = c.punct },
+		Todo = { fg = c.bg, bg = c.amber, bold = true },
+		Error = { fg = c.flow },
+
+		["@variable"] = { fg = c.ink },
+		["@variable.builtin"] = styled(c.func, c.st_builtin),
+		["@variable.parameter"] = styled(c.ink, c.st_param),
+		["@variable.member"] = { fg = c.ink },
+		["@property"] = { fg = c.ink },
+		["@constant"] = styled(c.string, c.st_constant),
+		["@constant.builtin"] = styled(c.func, c.st_builtin),
+		["@string"] = styled(c.string, c.st_string),
+		["@string.documentation"] = styled(c.comment or c.comment, c.st_doc or "i"),
+		["@string.escape"] = { fg = c.func },
+		["@number"] = { fg = c.string },
+		["@boolean"] = styled(c.string, c.st_constant),
+		["@function"] = styled(c.func, c.st_func),
+		["@function.call"] = styled(c.func, c.st_func),
+		["@function.method"] = styled(c.func, c.st_func),
+		["@function.method.call"] = styled(c.func, c.st_func),
+		["@function.builtin"] = styled(c.func, c.st_builtin),
+		["@function.macro"] = styled(c.func, c.st_preproc),
+		["@constructor"] = styled(c.type, c.st_type),
+		["@keyword"] = styled(c.keyword, c.st_keyword),
+		["@keyword.function"] = styled(c.keyword, c.st_keyword),
+		["@keyword.return"] = styled(c.flow or c.flow or c.keyword, c.st_flow or c.st_keyword),
+		["@keyword.operator"] = styled(c.keyword, c.st_keyword),
+		["@keyword.conditional"] = styled(c.flow or c.keyword, c.st_flow or c.st_keyword),
+		["@keyword.repeat"] = styled(c.flow or c.keyword, c.st_flow or c.st_keyword),
+		["@keyword.import"] = styled(c.func, c.st_preproc),
+		["@keyword.exception"] = { fg = c.flow },
+		["@type"] = styled(c.type, c.st_type),
+		["@type.builtin"] = styled(c.type, c.st_type),
+		["@type.qualifier"] = styled(c.keyword, c.st_keyword),
+		["@attribute"] = { fg = c.func },
+		["@module"] = { fg = c.func },
+		["@operator"] = { fg = c.punct },
+		["@punctuation.delimiter"] = { fg = c.punct },
+		["@punctuation.bracket"] = { fg = c.punct },
+		["@punctuation.special"] = { fg = c.func },
+		["@comment"] = styled(c.comment, c.st_comment or "i"),
+		["@markup.heading"] = { fg = c.string, bold = true },
+		["@markup.heading.1"] = { fg = c.string, bold = true },
+		["@markup.heading.2"] = { fg = c.string, bold = true },
+		["@markup.strong"] = { fg = c.ink, bold = true },
+		["@markup.italic"] = { fg = c.ink, italic = true },
+		["@markup.link"] = { fg = c.func, underline = true },
+		["@markup.link.label"] = { fg = c.string },
+		["@markup.link.url"] = { fg = c.faint, underline = true },
+		["@markup.list"] = { fg = c.keyword },
+		["@markup.quote"] = styled(c.comment, "i"),
+		["@markup.raw"] = styled(c.string, c.st_string),
+		["@markup.raw.delimiter"] = { fg = c.punct },
+
+		DiagnosticError = { fg = c.flow },
+		DiagnosticWarn = { fg = c.amber },
+		DiagnosticInfo = { fg = c.func },
+		DiagnosticHint = { fg = c.string },
+		DiagnosticOk = { fg = c.string },
+		DiagnosticUnderlineError = { sp = c.flow, undercurl = true },
+		DiagnosticUnderlineWarn = { sp = c.amber, undercurl = true },
+		DiagnosticUnderlineInfo = { sp = c.func, undercurl = true },
+		DiagnosticUnderlineHint = { sp = c.string, undercurl = true },
+		DiagnosticVirtualTextError = { fg = c.flow },
+		DiagnosticVirtualTextWarn = { fg = c.amber },
+		DiagnosticVirtualTextInfo = { fg = c.func },
+		DiagnosticVirtualTextHint = { fg = c.string },
+		LspInlayHint = { fg = c.overlay, bg = c.mantle },
+		GitSignsAdd = { fg = c.string },
+		GitSignsChange = { fg = c.amber },
+		GitSignsDelete = { fg = c.flow },
+		TelescopeNormal = { fg = c.ink, bg = c.mantle },
+		TelescopeBorder = { fg = c.seam, bg = c.mantle },
+		TelescopeSelection = { fg = c.ink, bg = c.plate },
+		TelescopeMatching = { fg = c.string, bold = true },
+		CmpItemAbbr = { fg = c.ink },
+		CmpItemAbbrMatch = { fg = c.string, bold = true },
+		CmpItemKind = { fg = c.type },
+		CmpItemMenu = { fg = c.faint },
+
+		WhichKey = { fg = c.keyword },
+		WhichKeyGroup = { fg = c.func },
+		WhichKeyDesc = { fg = c.ink },
+		WhichKeySeparator = { fg = c.punct },
+		WhichKeyFloat = { bg = c.mantle },
+		WhichKeyBorder = { fg = c.seam, bg = c.mantle },
+
+		IblIndent = { fg = c.seam },
+		IblScope = { fg = c.overlay },
+
+		NotifyERRORBorder = { fg = c.flow },
+		NotifyWARNBorder = { fg = c.amber },
+		NotifyINFOBorder = { fg = c.func },
+		NotifyDEBUGBorder = { fg = c.faint },
+		NotifyTRACEBorder = { fg = c.keyword },
+		NotifyERRORTitle = { fg = c.flow },
+		NotifyWARNTitle = { fg = c.amber },
+		NotifyINFOTitle = { fg = c.func },
+		NotifyBackground = { bg = c.mantle },
+
+		NoiceCmdlinePopupBorder = { fg = c.seam },
+		NoiceCmdlineIcon = { fg = c.keyword },
+
+		BufferLineFill = { bg = c.bg },
+		BufferLineBackground = { fg = c.faint, bg = c.mantle },
+		BufferLineBufferSelected = { fg = c.ink, bg = c.plate, bold = true },
+		BufferLineIndicatorSelected = { fg = c.keyword, bg = c.plate },
+
+		TroubleNormal = { fg = c.ink, bg = c.mantle },
+		TroubleText = { fg = c.ink },
+		TroubleCount = { fg = c.keyword },
+
+		MiniStatuslineModeNormal = { fg = c.bg, bg = c.keyword, bold = true },
+		MiniStatuslineModeInsert = { fg = c.bg, bg = c.string, bold = true },
+		MiniStatuslineModeVisual = { fg = c.bg, bg = c.func, bold = true },
+		MiniStatuslineModeReplace = { fg = c.bg, bg = c.flow, bold = true },
+		MiniStatuslineModeCommand = { fg = c.bg, bg = c.amber, bold = true },
+		MiniStatuslineDevinfo = { fg = c.ink, bg = c.plate },
+		MiniStatuslineFilename = { fg = c.faint, bg = c.bg },
+		MiniDiffSignAdd = { fg = c.string },
+		MiniDiffSignChange = { fg = c.amber },
+		MiniDiffSignDelete = { fg = c.flow },
+	}
+
+	local lsp_links = {
+		["@lsp.type.namespace"] = "@module",
+		["@lsp.type.type"] = "@type",
+		["@lsp.type.class"] = "@type",
+		["@lsp.type.enum"] = "@type",
+		["@lsp.type.interface"] = "@type",
+		["@lsp.type.struct"] = "@type",
+		["@lsp.type.typeParameter"] = "@type",
+		["@lsp.type.parameter"] = "@variable.parameter",
+		["@lsp.type.variable"] = "@variable",
+		["@lsp.type.property"] = "@property",
+		["@lsp.type.enumMember"] = "@constant",
+		["@lsp.type.function"] = "@function",
+		["@lsp.type.method"] = "@function.method",
+		["@lsp.type.macro"] = "@function.macro",
+		["@lsp.type.decorator"] = "@attribute",
+		["@lsp.type.keyword"] = "@keyword",
+		["@lsp.type.comment"] = "@comment",
+		["@lsp.type.string"] = "@string",
+		["@lsp.type.number"] = "@number",
+		["@lsp.type.operator"] = "@operator",
+		["@lsp.type.bracket"] = "@punctuation.bracket",
+		["@lsp.mod.defaultLibrary"] = "@function.builtin",
+		["@lsp.typemod.variable.defaultLibrary"] = "@variable.builtin",
+		["@lsp.typemod.function.defaultLibrary"] = "@function.builtin",
+		["@lsp.typemod.type.defaultLibrary"] = "@type.builtin",
+		["@lsp.typemod.class.defaultLibrary"] = "@type.builtin",
+	}
+
+	for group, target in pairs(lsp_links) do
+		vim.api.nvim_set_hl(0, group, { link = target })
+	end
+
+	for group, spec in pairs(groups) do
+		vim.api.nvim_set_hl(0, group, spec)
+	end
+
+	local terminal = {
+		c.plate, c.flow, c.string, c.amber, c.keyword, c.func, c.func, c.ink,
+		c.overlay, c.flow, c.string, c.amber, c.type, c.func, c.string, c.ink,
+	}
+	for index, color in ipairs(terminal) do
+		vim.g["terminal_color_" .. (index - 1)] = color
+	end
+end
+
+build({
+	bg = "#141417",
+	mantle = "#141417",
+	plate = "#202024",
+	seam = "#353538",
+	overlay = "#5c5c62",
+	ink = "#a9aea8",
+	faint = "#6f7873",
+	comment = "#63636a",
+	punct = "#6f7873",
+	string = "#7bb68d",
+	func = "#5f9a92",
+	keyword = "#538a97",
+	type = "#456b80",
+	flow = "#bd6c63",
+	amber = "#ab7c52",
+})
