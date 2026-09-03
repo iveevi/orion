@@ -85,5 +85,7 @@ return {
 			'nvim-tree/nvim-web-devicons'
 		},
 		opts = {},
-	}
+	},
+
+  { 'xiyaowong/transparent.nvim', },
 }

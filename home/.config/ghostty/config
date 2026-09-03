@@ -18,6 +18,8 @@ window-decoration = none
 window-padding-balance = true
 window-show-tab-bar = auto
 
+background-opacity = 0.9
+
 confirm-close-surface = false
 
 window-save-state = always

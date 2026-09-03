@@ -16,7 +16,7 @@ hash = "14558d2829c0aa05e99c57de8f74d199"
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
 rev = "73a3658"
-hash = "22d1a0b62204808b670771468f09c400"
+hash = "fa787a8ef785f2976ea2861f62b8c6c4"
 
 [[plugin.deps]]
 use = "AnirudhG07/rich-preview"

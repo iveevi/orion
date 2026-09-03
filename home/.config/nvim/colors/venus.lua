@@ -251,7 +251,7 @@ end
 build({
 	bg = "#141417",
 	mantle = "#141417",
-	plate = "#202024",
+	plate = "#2e2e34",
 	seam = "#353538",
 	overlay = "#5c5c62",
 	ink = "#a9aea8",
