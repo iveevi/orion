@@ -29,7 +29,10 @@ ShellRoot {
 
     ListModel { id: results }
 
+    property string stamp: ""
+
     Process {
+        id: scan
         running: true
         command: ["python3", Quickshell.shellDir + "/scan.py"]
         stdout: StdioCollector {
@@ -43,6 +46,27 @@ ShellRoot {
                 root.refilter()
             }
         }
+    }
+
+    Process {
+        id: probe
+        running: true
+        command: ["sh", "-c", "echo \"${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:$HOME/.local/share\" | tr ':' '\\n' | sed 's|$|/applications|' | xargs -r stat -c %Y 2>/dev/null | sort -n | tail -1"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const seen = text.trim()
+                if (seen === "" || seen === root.stamp) return
+                if (root.stamp !== "") scan.running = true
+                root.stamp = seen
+            }
+        }
+    }
+
+    Timer {
+        running: true
+        repeat: true
+        interval: 10000
+        onTriggered: probe.running = true
     }
 
     IpcHandler {
