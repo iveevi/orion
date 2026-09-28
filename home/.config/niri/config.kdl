@@ -64,6 +64,10 @@ spawn-at-startup "/home/venki/tools/venus/build/venus-notify"
 spawn-at-startup "systembus-notify"
 spawn-sh-at-startup "qs -c launcher"
 
+switch-events {
+    lid-close { spawn "sh" "-c" "pgrep -f '[q]uickshell -p .*lock_shell.qml' || ~/.local/share/quickshell-lockscreen/lock.sh"; }
+}
+
 hotkey-overlay {
     skip-at-startup
 }
