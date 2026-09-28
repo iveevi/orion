@@ -62,10 +62,11 @@ layout {
 spawn-sh-at-startup "d=$HOME/pictures/wallpapers; f=$(cat $HOME/.cache/venus/wallpaper 2>/dev/null); [ -f \"$d/$f\" ] || f=ken-cheung-KonWFWUaAuk-unsplash.jpg; exec swaybg -i \"$d/$f\" -m fill -c '#0d0d12'"
 spawn-at-startup "/home/venki/tools/venus/build/venus-notify"
 spawn-at-startup "systembus-notify"
+spawn-at-startup "swayidle" "-w" "before-sleep" "/home/venki/.local/share/quickshell-lockscreen/lock-wait.sh" "lock" "/home/venki/.local/share/quickshell-lockscreen/lock-wait.sh"
 spawn-sh-at-startup "qs -c launcher"
 
 switch-events {
-    lid-close { spawn "sh" "-c" "pgrep -f '[q]uickshell -p .*lock_shell.qml' || ~/.local/share/quickshell-lockscreen/lock.sh"; }
+    lid-close { spawn "/home/venki/.local/share/quickshell-lockscreen/lock-wait.sh"; }
 }
 
 hotkey-overlay {
