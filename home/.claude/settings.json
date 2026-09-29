@@ -7,7 +7,6 @@
       "Bash(rsync:*)"
     ]
   },
-  "model": "opus[1m]",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -33,6 +32,11 @@
   "extraKnownMarketplaces": {},
   "spinnerTipsEnabled": false,
   "effortLevel": "low",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "autoCompactWindow": 400000,
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
