@@ -87,5 +87,13 @@ return {
 		opts = {},
 	},
 
-  { 'xiyaowong/transparent.nvim', },
+	{
+		'xiyaowong/transparent.nvim',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require('transparent').setup {}
+			vim.g.transparent_enabled = true
+		end,
+	},
 }

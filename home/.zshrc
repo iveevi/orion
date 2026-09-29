@@ -1,6 +1,3 @@
-[[ -o interactive ]] && uv run --project ~/tools/tonberry tonberry
-
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -57,5 +54,3 @@ export GOPATH="$HOME/.local/share/go"
 # Ongoing research projects
 alias pew='uv run --project ~/tools/pew pew'
 alias jkl='uv run --project ~/tools/jkl jkl'
-alias tb='uv run --project ~/tools/tonberry tonberry'
-alias tbe='uv run --project ~/tools/tonberry tonberry edit'

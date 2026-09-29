@@ -50,5 +50,10 @@ return {
 		end,
 	},
 
-	{ 'xuhdev/vim-latex-live-preview', },
+	{
+		'xuhdev/vim-latex-live-preview',
+		init = function()
+			vim.g.livepreview_previewer = 'zathura'
+		end,
+	},
 }
