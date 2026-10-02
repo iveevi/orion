@@ -22,7 +22,12 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-PROMPT='%F{green}%m%f %F{blue}%1~%f %# '
+PROMPT='%B%F{8}%m %F{5}○%f %F{15}%1~%f%b '
+
+autoload -Uz add-zsh-hook
+_prompt_spacer() { [[ -n $_prompt_spaced ]] && print; _prompt_spaced=1 }
+add-zsh-hook precmd _prompt_spacer
+clear() { command clear; unset _prompt_spaced }
 
 # Enable home and end keys
 bindkey "^[[H" beginning-of-line
