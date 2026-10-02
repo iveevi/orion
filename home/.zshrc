@@ -22,7 +22,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-PROMPT='%F{green}%m%f %F{blue}%~%f %# '
+PROMPT='%F{green}%m%f %F{blue}%1~%f %# '
 
 # Enable home and end keys
 bindkey "^[[H" beginning-of-line
