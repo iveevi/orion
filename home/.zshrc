@@ -54,3 +54,4 @@ export GOPATH="$HOME/.local/share/go"
 # Ongoing research projects
 alias pew='uv run --project ~/tools/pew pew'
 alias jkl='uv run --project ~/tools/jkl jkl'
+alias code='FONTCONFIG_FILE=~/.config/fontconfig/vscode.conf code'
