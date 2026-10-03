@@ -89,7 +89,7 @@ window-rule {
 binds {
     Mod+Space		repeat=false { spawn "/home/venki/.local/bin/saturn"; }
     Mod+Return		repeat=false { spawn "ghostty"; }
-    Mod+E		repeat=false { spawn "nautilus"; }
+    Mod+E		repeat=false { spawn "grove"; }
     Ctrl+Q		repeat=false { close-window; }
     Mod+Ctrl+Left	{ move-column-left; }
     Mod+Ctrl+Right	{ move-column-right; }
