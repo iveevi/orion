@@ -86,6 +86,13 @@ window-rule {
     draw-border-with-background false
 }
 
+layer-rule {
+    match namespace="^saturn-notify$"
+    background-effect {
+        xray false
+    }
+}
+
 binds {
     Mod+Space		repeat=false { spawn "/home/venki/.local/bin/saturn"; }
     Mod+Return		repeat=false { spawn "ghostty"; }
