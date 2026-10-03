@@ -27,3 +27,7 @@ keybind = ctrl+shift+e=equalize_splits
 
 gtk-single-instance = false
 linux-cgroup = always
+
+gtk-custom-css = tabs.css
+
+adjust-cursor-thickness = 3
